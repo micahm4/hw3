@@ -65,10 +65,13 @@ void dealloc(Node* head)
 // -----------------------------------------------
 //   Add any helper functions or
 //   function object struct declarations
-// -----------------------------------------------
 
 
-
+struct removeMultiple {
+  bool operator()(int val) {
+    return val % 3 == 0;
+  }
+};
 
 
 int main(int argc, char* argv[])
@@ -86,6 +89,34 @@ int main(int argc, char* argv[])
     print(head);
 
     // Test out your linked list code
+
+    Node* larger;
+    Node * smaller;
+
+    int pivot = 17;
+
+    llpivot(head, smaller, larger, pivot);
+
+    cout << "Smaller or equal: ";
+    print(smaller);
+
+    cout << "Larger: ";
+    print(larger);
+
+    dealloc(smaller); // free them
+    dealloc(larger);
+
+    head = readList(argv[1]);
+
+    cout << "Orginal list: ";
+    print(head);
+
+    head = llfilter(head, removeMultiple());
+
+    cout << "After removing: ";
+    print(head);
+
+    dealloc(head);
 
 
 
